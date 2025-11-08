@@ -22,32 +22,33 @@
     </header>
 
     <div class="overlay">
-      <form  onsubmit="formSubmitHandler(event)">
+      <form onsubmit="formSubmitHandler(event)">
         <i class="fa-solid fa-xmark"></i>
         <h2>Add New Task</h2>
 
         <div class="form-label">
           <label for="">Task Title</label>
           <input
-           
+            id="title"
             type="text"
             placeholder="e.g., Redesign  the main landing page"
+            required
           />
         </div>
 
         <div class="form-label">
           <label for="">Description</label>
-          <textarea name=""  rows="5"></textarea>
+          <textarea name="" id="description" rows="5" required></textarea>
         </div>
 
         <div class="form-date-container">
           <div class="form-label">
             <label for="">Due Date</label>
-            <input type="date"  />
+            <input type="date" id="dueDate" required />
           </div>
           <div class="form-label">
             <label for="">Priority</label>
-            <select name="" id="">
+            <select name="" id="priority" required>
               <option value="high">High</option>
               <option value="low">Low</option>
               <option value="medium">Medium</option>
@@ -74,6 +75,7 @@
       </div>
 
       <div class="todo-container">
+
         <div class="todo">
           <div class="todo-content">
             <input type="checkbox" />
@@ -92,6 +94,8 @@
             <i class="fa-solid fa-trash"></i>
           </div>
         </div>
+
+        
       </div>
     </div>
     <script src="script.js"></script>

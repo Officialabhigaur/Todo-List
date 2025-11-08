@@ -123,8 +123,6 @@ header a {
 }
 
 .date-priority-container span:first-child {
-  background-color: rgb(255, 186, 186);
-  color: rgb(116, 0, 0);
   border-radius: 20px;
   padding: 0.1rem 0.4rem;
   font-size: 0.8rem;
@@ -145,10 +143,11 @@ header a {
   height: 100vh;
   background-color: rgba(51, 51, 51, 0.583);
   position: absolute;
-  top: 0;
+  top: -100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: 0.3s ease;
 }
 
 form {
@@ -209,8 +208,6 @@ form .form-label textarea {
   background-color: rgb(236, 236, 236);
 }
 
-
-
 .btn-save {
   padding: 0.5rem;
   border-radius: 5px;
@@ -220,4 +217,31 @@ form .form-label textarea {
   font-size: 1.2rem;
   margin-top: 1rem;
   cursor: pointer;
+}
+
+.border-red {
+  border-left: 6px solid red;
+}
+
+.border-orange {
+  border-left: 6px solid orange;
+}
+
+.border-green {
+  border-left: 6px solid #84c61f;
+}
+
+.background-red {
+  background-color: #ffc4c4;
+  color: red;
+}
+
+.background-green {
+  background-color: #d7fd9c;
+  color: green;
+}
+
+.background-orange {
+  background-color: #f8deaf;
+  color: orange;
 }
