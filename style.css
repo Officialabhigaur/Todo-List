@@ -219,6 +219,10 @@ form .form-label textarea {
   cursor: pointer;
 }
 
+.fa-trash, .fa-pen{
+  cursor: pointer;
+}
+
 .border-red {
   border-left: 6px solid red;
 }

@@ -25,7 +25,6 @@ function saveTasksToLocalStorage() {
 function renderTask() {
   todoContainer.innerHTML = "";
   tasks.map((task) => {
-    
     const borderColor =
       task.priority === "high"
         ? "border-red"
@@ -54,8 +53,8 @@ function renderTask() {
           </div>
 
           <div class="icon-container">
-            <i class="fa-solid fa-pen"></i>
-            <i class="fa-solid fa-trash" ></i>
+            <i class="fa-solid fa-pen" ></i>
+            <i class="fa-solid fa-trash" onclick="deleteTask(${task.id})"></i>
           </div>
         </div>`;
   });
@@ -68,6 +67,7 @@ function formSubmitHandler(e) {
   const description = document.getElementById("description").value;
   const dueDate = document.getElementById("dueDate").value;
   const priority = document.getElementById("priority").value;
+  const form = document.querySelector("form");
 
   let task = {
     id: Date.now(),
@@ -80,7 +80,15 @@ function formSubmitHandler(e) {
   tasks.push(task);
   saveTasksToLocalStorage();
   renderTask();
+  form.reset();
 }
 renderTask();
 
 // localStorage.clear()
+
+// delete functionality
+function deleteTask(Id) {
+  tasks = tasks.filter((task) => task.id !== Id);
+  saveTasksToLocalStorage();
+  renderTask();
+}
