@@ -17,6 +17,7 @@ btnSave.addEventListener("click", () => {
 });
 
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+let editId = null;
 
 function saveTasksToLocalStorage() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -53,7 +54,7 @@ function renderTask() {
           </div>
 
           <div class="icon-container">
-            <i class="fa-solid fa-pen" ></i>
+            <i class="fa-solid fa-pen"  onclick="editTask(${task.id})"></i>
             <i class="fa-solid fa-trash" onclick="deleteTask(${task.id})"></i>
           </div>
         </div>`;
@@ -63,21 +64,31 @@ function renderTask() {
 function formSubmitHandler(e) {
   e.preventDefault();
 
-  const title = document.getElementById("title").value;
-  const description = document.getElementById("description").value;
-  const dueDate = document.getElementById("dueDate").value;
-  const priority = document.getElementById("priority").value;
+  let title = document.getElementById("title").value;
+  let description = document.getElementById("description").value;
+  let dueDate = document.getElementById("dueDate").value;
+  let priority = document.getElementById("priority").value;
   const form = document.querySelector("form");
 
-  let task = {
-    id: Date.now(),
-    title,
-    description,
-    dueDate,
-    priority,
-  };
+  if (editId) {
+    let task = tasks.find((task) => task.id === editId);
+    task.title = title;
+    task.description = description;
+    task.dueDate = dueDate;
+    task.priority = priority;
 
-  tasks.push(task);
+    btnSave.innerText = "Add Task"
+    form.reset()
+  } else {
+    let task = {
+      id: Date.now(),
+      title,
+      description,
+      dueDate,
+      priority,
+    };
+    tasks.push(task);
+  }
   saveTasksToLocalStorage();
   renderTask();
   form.reset();
@@ -92,3 +103,18 @@ function deleteTask(Id) {
   saveTasksToLocalStorage();
   renderTask();
 }
+
+function editTask(Id) {
+  let task = tasks.find((task) => task.id === Id);
+
+  document.getElementById("title").value = task.title;
+  document.getElementById("description").value = task.description;
+  document.getElementById("dueDate").value = task.dueDate;
+  document.getElementById("priority").value = task.priority;
+
+  btnSave.innerText = "Update Task";
+  editId = Id;
+  overlay.style.top = "0";
+}
+
+
