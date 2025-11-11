@@ -23,9 +23,9 @@ function saveTasksToLocalStorage() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-function renderTask() {
+function renderTask(filterTask = tasks) {
   todoContainer.innerHTML = "";
-  tasks.map((task) => {
+  filterTask.map((task) => {
     const borderColor =
       task.priority === "high"
         ? "border-red"
@@ -76,9 +76,8 @@ function formSubmitHandler(e) {
     task.description = description;
     task.dueDate = dueDate;
     task.priority = priority;
-
-    btnSave.innerText = "Add Task"
-    form.reset()
+    btnSave.innerText = "Add Task";
+    form.reset();
   } else {
     let task = {
       id: Date.now(),
@@ -104,6 +103,7 @@ function deleteTask(Id) {
   renderTask();
 }
 
+// Edit functionality
 function editTask(Id) {
   let task = tasks.find((task) => task.id === Id);
 
@@ -116,5 +116,18 @@ function editTask(Id) {
   editId = Id;
   overlay.style.top = "0";
 }
+
+// search functionality
+let searchBar = document.querySelector("#searchBar");
+searchBar.addEventListener("input", (e) => {
+  let searchValue = e.target.value.toLowerCase();
+
+  let filterTask = tasks.filter((task) =>
+    task.title.toLowerCase().includes(searchValue)
+  );
+  renderTask(filterTask);
+});
+
+
 
 
